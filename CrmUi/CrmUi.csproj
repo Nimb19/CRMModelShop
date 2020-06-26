@@ -62,28 +62,46 @@
     <Compile Include="FormCatalog.Designer.cs">
       <DependentUpon>FormCatalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCustomer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormCustomer.Designer.cs">
-      <DependentUpon>FormCustomer.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsAddingInDB\FormCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsAddingInDB\FormCustomer.Designer.cs">
+      <DependentUpon>FormCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsAddingInDB\FormProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsAddingInDB\FormProduct.Designer.cs">
+      <DependentUpon>FormProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsAddingInDB\FormSeller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsAddingInDB\FormSeller.Designer.cs">
+      <DependentUpon>FormSeller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormCatalog.resx">
       <DependentUpon>FormCatalog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCustomer.resx">
-      <DependentUpon>FormCustomer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsAddingInDB\FormCustomer.resx">
+      <DependentUpon>FormCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsAddingInDB\FormProduct.resx">
+      <DependentUpon>FormProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsAddingInDB\FormSeller.resx">
+      <DependentUpon>FormSeller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

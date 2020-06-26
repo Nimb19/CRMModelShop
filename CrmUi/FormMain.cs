@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using CrmBL.Model;
+using CrmUi.FormsAddingInDB;
 
 namespace CrmUi
 {
@@ -21,6 +16,7 @@ namespace CrmUi
             db = new CRMContext();
         }
 
+        // Блок вывода таблиц из базы данных о продукте, продавце, покупателе и чеке
         private void ProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormCatalog<Product> formCatalogProduct = new FormCatalog<Product>(db.Products);
@@ -43,6 +39,27 @@ namespace CrmUi
         {
             FormCatalog<Check> formCatalogCheck = new FormCatalog<Check>(db.Checks);
             formCatalogCheck.Show();
+        }
+
+        // Блок вывода окна добавления в базу данные о продукте, продавце, покупателе и чеке
+        private void ProductAddToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formProduct = new FormProduct();
+            if (formProduct.ShowDialog() == DialogResult.OK)
+            {
+                db.Products.Add(formProduct.Product);
+                db.SaveChanges();
+            }
+        }
+
+        private void SellerAddToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formSeller = new FormSeller();
+            if (formSeller.ShowDialog() == DialogResult.OK)
+            {
+                db.Sellers.Add(formSeller.Seller);
+                db.SaveChanges();
+            }
         }
 
         private void CustomerAddToolStripMenuItem_Click(object sender, EventArgs e)
