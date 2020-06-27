@@ -14,6 +14,15 @@ namespace CrmUi.FormsAddingInDB
             InitializeComponent();
         }
 
+        public FormCustomer(Customer customer) : this()
+        {
+            Customer = customer;
+            tbName.Text = customer.Name;
+
+            this.buttonAdd.Text = "Изменить";
+            this.Text = "Форма изменения данных о покупателе";
+        }
+
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             var name = tbName.Text;
@@ -25,7 +34,9 @@ namespace CrmUi.FormsAddingInDB
                 return;
             }
 
-            Customer = new Customer() { Name = name.Trim() };
+            var customer = Customer ?? new Customer();
+            customer.Name = name.Trim();
+
             this.DialogResult = DialogResult.OK;
             Close();
         }

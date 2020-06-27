@@ -19,29 +19,29 @@ namespace CrmUi
         // Блок вывода таблиц из базы данных о продукте, продавце, покупателе и чеке
         private void ProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCatalog<Product> formCatalogProduct = new FormCatalog<Product>(db.Products);
+            FormCatalog<Product> formCatalogProduct = new FormCatalog<Product>(db.Products, db);
             formCatalogProduct.Show();
         }
 
         private void SellerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCatalog<Seller> formCatalogSeller = new FormCatalog<Seller>(db.Sellers);
+            FormCatalog<Seller> formCatalogSeller = new FormCatalog<Seller>(db.Sellers, db);
             formCatalogSeller.Show();
         }
 
         private void CustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCatalog<Customer> formCatalogCustomer = new FormCatalog<Customer>(db.Customers);
+            FormCatalog<Customer> formCatalogCustomer = new FormCatalog<Customer>(db.Customers, db);
             formCatalogCustomer.Show();
         }
 
         private void CheckToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCatalog<Check> formCatalogCheck = new FormCatalog<Check>(db.Checks);
+            FormCatalog<Check> formCatalogCheck = new FormCatalog<Check>(db.Checks, db);
             formCatalogCheck.Show();
         }
 
-        // Блок вывода окна добавления в базу данные о продукте, продавце, покупателе и чеке
+        // Блок вывода окон добавления в базу данные о продукте, продавце и покупателе
         private void ProductAddToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var formProduct = new FormProduct();

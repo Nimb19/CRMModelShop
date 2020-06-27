@@ -14,6 +14,15 @@ namespace CrmUi.FormsAddingInDB
             InitializeComponent();
         }
 
+        public FormSeller(Seller seller) : this()
+        {
+            Seller = seller;
+            tbName.Text = seller.Name;
+
+            this.buttonAdd.Text = "Изменить";
+            this.Text = "Форма изменения данных о продавце";
+        }
+
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             var name = tbName.Text;
@@ -25,7 +34,9 @@ namespace CrmUi.FormsAddingInDB
                 return;
             }
 
-            Seller = new Seller() { Name = name.Trim() };
+            var seller = Seller ?? new Seller();
+            seller.Name = name.Trim();
+
             this.DialogResult = DialogResult.OK;
             Close();
         }

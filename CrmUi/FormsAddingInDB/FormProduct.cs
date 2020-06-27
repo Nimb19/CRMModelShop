@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using CrmBL.Model;
 
 namespace CrmUi.FormsAddingInDB
@@ -20,40 +14,58 @@ namespace CrmUi.FormsAddingInDB
             InitializeComponent();
         }
 
+        public FormProduct(Product product) : this()
+        {
+            Product = product;
+            tbName.Text = product.Name;
+            nUpDownPrice.Value = product.Price;
+            nUpDownCount.Value = product.Count;
+
+            this.buttonAdd.Text = "Изменить продукт";
+            this.Text = "Форма изменения данных о продукте";
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var name = tbName.Text;
-            if (string.IsNullOrWhiteSpace(name))
+            if (!CheckValidation())
+            {
+                return;
+            }
+
+            var p = Product ?? new Product();
+            p.Name = tbName.Text.Trim();
+            p.Price = nUpDownPrice.Value;
+            p.Count = Convert.ToInt32(nUpDownCount.Value);
+
+            this.DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private bool CheckValidation()
+        {
+            if (string.IsNullOrWhiteSpace(tbName.Text))
             {
                 MessageBox.Show("Пожалуйста, введите корректное название продукта.\n" +
                     "Поле не может быть пустым или состоять только из пробелов.", "Ошибка!",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
             else if (string.IsNullOrWhiteSpace(nUpDownPrice.Value.ToString()))
             {
                 MessageBox.Show("Пожалуйста, введите корректную цену продукта.\n" +
                     "Поле не может быть пустым или состоять только из пробелов.", "Ошибка!",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
-            else if(string.IsNullOrWhiteSpace(nUpDownCount.Value.ToString()))
+            else if (string.IsNullOrWhiteSpace(nUpDownCount.Value.ToString()))
             {
                 MessageBox.Show("Пожалуйста, введите корректное количество продукта.\n" +
                     "Поле не может быть пустым или состоять только из пробелов.", "Ошибка!",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
 
-            Product = new Product() 
-            { 
-                Name = name.Trim(), 
-                Price = nUpDownPrice.Value, 
-                Count = Convert.ToInt32(nUpDownCount.Value)
-            };
-
-            this.DialogResult = DialogResult.OK;
-            Close();
+            return true;
         }
     }
 }
