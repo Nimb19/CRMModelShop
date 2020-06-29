@@ -15,5 +15,22 @@ namespace CrmBL.Model
         {
             return Name;
         }
+
+        public override int GetHashCode()
+        {
+            return ProductId;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Product product)
+            {
+                return ProductId.Equals(product.GetHashCode());
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
