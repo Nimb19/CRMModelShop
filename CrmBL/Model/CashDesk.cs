@@ -40,6 +40,8 @@ namespace CrmBL.Model
         /// </summary>
         public bool IsModel { get; set; }
 
+        public int Count => Carts.Count;
+
         /// <summary>
         /// Конструктор.
         /// </summary>
@@ -114,7 +116,7 @@ namespace CrmBL.Model
         }
 
         /// <summary>
-        /// Добавить корзину.
+        /// Добавляет корзину.
         /// </summary>
         /// <param name="cart"> Корзина. </param>
         public void Enqueue(Cart cart)

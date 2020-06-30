@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CrmBL.Model
 {
-    class Generator
+    public class Generator
     {
         private Random rnd = new Random();
 
@@ -17,7 +17,7 @@ namespace CrmBL.Model
         /// </summary>
         /// <param name="count"> Количество клиентов. </param>
         /// <returns></returns>
-        public List<Customer> AddCustomers(int count = 5)
+        public List<Customer> GetCustomers(int count = 5)
         {
             List<Customer> customers = new List<Customer>();
 
@@ -44,7 +44,7 @@ namespace CrmBL.Model
         /// </summary>
         /// <param name="count"> Количество продуктов. </param>
         /// <returns></returns>
-        public List<Product> AddProducts(int count = 5)
+        public List<Product> GetProducts(int count = 5)
         {
             List<Product> products = new List<Product>();
 
@@ -73,7 +73,7 @@ namespace CrmBL.Model
         /// </summary>
         /// <param name="count"> Количество продавцов. </param>
         /// <returns></returns>
-        public List<Seller> AddSellers(int count = 5)
+        public List<Seller> GetSellers(int count = 5)
         {
             List<Seller> sellers = new List<Seller>();
 
@@ -88,6 +88,26 @@ namespace CrmBL.Model
             }
 
             return sellers;
+        }
+
+        /// <summary>
+        /// Случайные продукты из списка.
+        /// </summary>
+        /// <param name="products"> Список продуктов. </param>
+        /// <param name="min"> Минимальное кол-во продуктов в результате. </param>
+        /// <param name="max"> Максимальное кол-во продуктов в результате. </param>
+        /// <returns></returns>
+        public List<Product> GetRandomProducts(List<Product> products, int min = 1, int max = 25)
+        {
+            var result = new List<Product>();
+            int count = rnd.Next(min, max);
+
+            for (int i = 0; i < count && i < products.Count; i++)
+            {
+                result.Add(products[rnd.Next(products.Count - 1)]);
+            }
+
+            return result;
         }
 
         /// <summary>
