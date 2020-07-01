@@ -102,7 +102,10 @@ namespace CrmBL.Model
                     summ += product.Price;
                     sells.Add(sell);
 
-                    db.Sells.Add(sell);
+                    if (!IsModel)
+                    {
+                        db.Sells.Add(sell);
+                    }
                     product.Count--;
                 }
 

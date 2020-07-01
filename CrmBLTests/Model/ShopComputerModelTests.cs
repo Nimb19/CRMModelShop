@@ -1,10 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CrmBL.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CrmBL.Model.Tests
 {
@@ -19,9 +15,11 @@ namespace CrmBL.Model.Tests
 
             // Act
             shopModel.Start();
-            
+            Thread.Sleep(15000);
+            shopModel.Results();
+
             // Assert
-        
+
         }
     }
 }
