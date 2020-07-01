@@ -11,13 +11,11 @@ namespace CrmBL.Model
         Generator generator = new Generator();
         Random rnd = new Random();
         private bool isWorking;
-        private decimal money;
-        private int clientCount;
 
-        public List<CashDesk> CashDesks { get; set; } = new List<CashDesk>();
-        //public List<Cart> Carts { get; set; }
-        //public List<Check> Cheks { get; set; }
         //public List<Sell> Sells { get; set; }
+        //public List<Cart> Carts { get; set; }
+        public List<CashDesk> CashDesks { get; set; } = new List<CashDesk>();
+        public List<Check> Checks { get; set; } = new List<Check>();
         public List<Product> Products { get; set; }
         public List<Customer> Customers { get; set; }
         public Queue<Seller> Sellers { get; set; } = new Queue<Seller>();
@@ -40,39 +38,42 @@ namespace CrmBL.Model
             }
         }
 
+        /// <summary>
+        /// Начинает процесс моделирование.
+        /// </summary>
         public void Start()
         {
-            Task.Run(() => CreateCarts(rnd.Next(10, 100)));
+            Task.Run(() => CreateCarts());
 
             foreach (var cash in CashDesks)
             {
-                Task.Run(() => UseCashDesks());
+                Task.Run(() => UseCashDesks(cash));
             }
         }
 
-        public void Results()
+        /// <summary>
+        /// Заканчивает процесс моделирования.
+        /// </summary>
+        public List<Check> Stop()
         {
             isWorking = false;
-            var clCount = clientCount;
-            var allMoney = money;
-            var summ = CashDesks.Sum(x => x.ExitCustomers);
+            return Checks;
         }
 
-        private void UseCashDesks()
+        private void UseCashDesks(CashDesk cashDesk, int sleep = 100)
         {
             while (isWorking)
             {
-                var cashDesc = CashDesks.OrderByDescending(x => x.Count).First();
-                if (cashDesc.Count == 0)
+                if (cashDesk.Count == 0)
                 {
                     continue;
                 }
-                money += cashDesc.Dequeue();
-                clientCount++;
+                Checks.Add(cashDesk.Dequeue());
+                Thread.Sleep(sleep);
             }
         }
 
-        private void CreateCarts(int sleep = 10, int customersCount = 10)
+        private void CreateCarts(int sleep = 50, int customersCount = 1000)
         {
             var customers = generator.GetCustomers(customersCount);
             var carts = new List<Cart>();
@@ -84,7 +85,8 @@ namespace CrmBL.Model
                     return;
                 }
                 var cart = new Cart(customer);
-                foreach (var product in generator.GetRandomProducts(Products))
+                var currProducts = generator.GetRandomProducts(Products);
+                foreach (var product in currProducts)
                 {
                     cart.Add(product);
                 }
@@ -96,7 +98,6 @@ namespace CrmBL.Model
                 var cashDesc = CashDesks.OrderBy(x => x.Count).First();
                 cashDesc.Enqueue(cart);
             }
-            carts = new List<Cart>();
 
             Thread.Sleep(sleep);
         }

@@ -59,16 +59,15 @@ namespace CrmBL.Model
         }
 
         /// <summary>
-        /// Произвести покупку.
+        /// Производит покупку.
         /// </summary>
         /// <returns> Итоговая цена. </returns>
-        public decimal Dequeue()
+        public Check Dequeue()
         {
-            decimal summ = 0;
-            var currCart = Carts.Dequeue();
-            if (currCart != null)
+            if (Carts.Count != 0)
             {
-                var check = new Check()
+                var currCart = Carts.Dequeue();
+                Check check = new Check()
                 {
                     Customer = currCart.Customer,
                     CustomerId = currCart.Customer.CustomerId,
@@ -76,15 +75,6 @@ namespace CrmBL.Model
                     SellerId = Seller.SellerId,
                     DataCreated = DateTime.Now
                 };
-
-                if (!IsModel)
-                {
-                    db.Checks.Add(check);
-                }
-                else
-                {
-                    check.CheckId = 0;
-                }
 
                 List<Sell> sells = new List<Sell>();
                 foreach (Product product in currCart)
@@ -99,7 +89,6 @@ namespace CrmBL.Model
                         Product = product,
                         ProductId = product.ProductId
                     };
-                    summ += product.Price;
                     sells.Add(sell);
 
                     if (!IsModel)
@@ -109,13 +98,22 @@ namespace CrmBL.Model
                     product.Count--;
                 }
 
+                check.Sells = sells;
+
                 if (!IsModel)
                 {
+                    db.Checks.Add(check);
                     db.SaveChanges();
                 }
+                else
+                {
+                    check.CheckId = 0;
+                }
+
+                return check;
             }
 
-            return summ;
+            return null;
         }
 
         /// <summary>

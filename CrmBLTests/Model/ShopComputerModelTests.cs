@@ -15,8 +15,8 @@ namespace CrmBL.Model.Tests
 
             // Act
             shopModel.Start();
-            Thread.Sleep(15000);
-            shopModel.Results();
+            Thread.Sleep(25000);
+            shopModel.Stop();
 
             // Assert
 

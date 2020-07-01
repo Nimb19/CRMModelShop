@@ -58,6 +58,7 @@ namespace CrmBL.Model
                     Count = rnd.Next(50, 150)
                 };
                 products.Add(product);
+                _products++;
             }
 
             return products;

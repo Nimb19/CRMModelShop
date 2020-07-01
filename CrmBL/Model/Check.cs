@@ -10,6 +10,23 @@ namespace CrmBL.Model
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
+        public decimal Price 
+        { 
+            get
+            {
+                if (Sells == null)
+                {
+                    return 0;
+                }
+                decimal price = 0;
+                foreach (var sell in Sells)
+                {
+                    price += sell.Product.Price;
+                }
+                return price;
+            }
+        }
+
         public int SellerId { get; set; }
         public virtual Seller Seller { get; set; }
 
@@ -19,7 +36,7 @@ namespace CrmBL.Model
 
         public override string ToString()
         {
-            return $"№{CheckId.ToString()} от {DataCreated.ToString("dd.MM.yyyy hh:mm:ss")}";
+            return $"№{CheckId.ToString()}. Итого {Price.ToString()}, от {DataCreated.ToString("dd.MM.yyyy hh:mm:ss")}";
         }
     }
 }
