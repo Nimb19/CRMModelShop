@@ -19,9 +19,11 @@ namespace CrmBL.Model
         public List<Product> Products { get; set; }
         public List<Customer> Customers { get; set; }
         public Queue<Seller> Sellers { get; set; } = new Queue<Seller>();
+        public int CountCashDescks { get; set; }
 
-        public ShopComputerModel()
+        public ShopComputerModel(int countCashDescks = 3)
         {
+            CountCashDescks = countCashDescks;
             var sellers = generator.GetSellers(20);
             Customers = generator.GetCustomers(1000);
             Products = generator.GetProducts(100);
@@ -32,7 +34,7 @@ namespace CrmBL.Model
                 Sellers.Enqueue(seller);
             }
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < CountCashDescks; i++)
             {
                 CashDesks.Add(new CashDesk(CashDesks.Count, Sellers.Dequeue()));
             }
@@ -43,6 +45,8 @@ namespace CrmBL.Model
         /// </summary>
         public void Start()
         {
+            isWorking = true;
+
             Task.Run(() => CreateCarts());
 
             foreach (var cash in CashDesks)
@@ -73,33 +77,37 @@ namespace CrmBL.Model
             }
         }
 
-        private void CreateCarts(int sleep = 50, int customersCount = 1000)
+        private void CreateCarts(int sleep = 50, int customersCount = 10)
         {
-            var customers = generator.GetCustomers(customersCount);
-            var carts = new List<Cart>();
-
-            foreach (var customer in customers)
+            while (isWorking)
             {
-                if (!isWorking)
-                {
-                    return;
-                }
-                var cart = new Cart(customer);
-                var currProducts = generator.GetRandomProducts(Products);
-                foreach (var product in currProducts)
-                {
-                    cart.Add(product);
-                }
-                carts.Add(cart);
-            }
+                var customers = generator.GetCustomers(customersCount);
+                var carts = new List<Cart>();
 
-            foreach (var cart in carts)
-            {
-                var cashDesc = CashDesks.OrderBy(x => x.Count).First();
-                cashDesc.Enqueue(cart);
-            }
+                foreach (var customer in customers)
+                {
+                    if (!isWorking)
+                    {
+                        return;
+                    }
+                    var cart = new Cart(customer);
+                    var currProducts = generator.GetRandomProducts(Products);
+                    foreach (var product in currProducts)
+                    {
+                        cart.Add(product);
+                    }
+                    carts.Add(cart);
+                }
 
-            Thread.Sleep(sleep);
+                foreach (var cart in carts)
+                {
+                    //var cashDesc = CashDesks.OrderBy(x => x.Count).First();
+                    var cashDesc = CashDesks[rnd.Next(0, CashDesks.Count)];
+                    cashDesc.Enqueue(cart);
+                }
+
+                Thread.Sleep(sleep);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 
 using CrmBL.Model;
 using CrmUi.FormsAddingInDB;
+using CrmUI;
 
 namespace CrmUi
 {
@@ -70,6 +71,12 @@ namespace CrmUi
                 db.Customers.Add(formCustomer.Customer);
                 db.SaveChanges();
             }
+        }
+
+        private void ComputerModetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModelForm modelForm = new ModelForm(10);
+            modelForm.Show();
         }
     }
 }

@@ -34,13 +34,31 @@ namespace CrmBL.Model
         /// Ушедшие покупатели из-за нехватки мест на кассе.
         /// </summary>
         public int ExitCustomers { get; set; }
+
+        /// <summary>
+        /// Общая прибыль с кассы.
+        /// </summary>
+        public decimal CountProfit { get; set; }
         
         /// <summary>
         /// Создана ли касса в целях моделирования.
         /// </summary>
         public bool IsModel { get; set; }
 
+        /// <summary>
+        /// Количество корзин на кассе.
+        /// </summary>
         public int Count => Carts.Count;
+
+        /// <summary>
+        /// Общее количество покупателей.
+        /// </summary>
+        public int CountCustomers { get; set; }
+
+        /// <summary>
+        /// Срабатывает когда произошла покупка.
+        /// </summary>
+        public event EventHandler<Check> CheckClosed;
 
         /// <summary>
         /// Конструктор.
@@ -95,6 +113,7 @@ namespace CrmBL.Model
                     {
                         db.Sells.Add(sell);
                     }
+                    CountProfit += product.Price;
                     product.Count--;
                 }
 
@@ -109,6 +128,8 @@ namespace CrmBL.Model
                 {
                     check.CheckId = 0;
                 }
+
+                CheckClosed?.Invoke(this, check);
 
                 return check;
             }
@@ -125,6 +146,7 @@ namespace CrmBL.Model
             if (Carts.Count < MaxQueueCount)
             {
                 Carts.Enqueue(cart);
+                CountCustomers += 1;
             }
             else
             {
