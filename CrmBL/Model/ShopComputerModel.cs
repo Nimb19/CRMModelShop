@@ -12,8 +12,6 @@ namespace CrmBL.Model
         Random rnd = new Random();
         private bool isWorking;
 
-        //public List<Sell> Sells { get; set; }
-        //public List<Cart> Carts { get; set; }
         public List<CashDesk> CashDesks { get; set; } = new List<CashDesk>();
         public List<Check> Checks { get; set; } = new List<Check>();
         public List<Product> Products { get; set; }
@@ -101,8 +99,7 @@ namespace CrmBL.Model
 
                 foreach (var cart in carts)
                 {
-                    //var cashDesc = CashDesks.OrderBy(x => x.Count).First();
-                    var cashDesc = CashDesks[rnd.Next(0, CashDesks.Count)];
+                    var cashDesc = CashDesks.OrderBy(x => x.Count).First();
                     cashDesc.Enqueue(cart);
                 }
 
