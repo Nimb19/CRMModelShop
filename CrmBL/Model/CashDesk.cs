@@ -8,7 +8,7 @@ namespace CrmBL.Model
     /// </summary>
     public class CashDesk
     {
-        CRMContext db = new CRMContext();
+        CRMContext db;
 
         /// <summary>
         /// Номер кассы.
@@ -67,10 +67,11 @@ namespace CrmBL.Model
         /// <param name="seller"> Продавец. </param>
         /// <param name="maxQueueCount"> Максимальное количество покупателей. </param>
         /// <param name="isModel"> Создана ли касса в целях моделирования. </param>
-        public CashDesk(int number, Seller seller, int maxQueueCount = 10, bool isModel = true)
+        public CashDesk(int number, Seller seller, CRMContext db, int maxQueueCount = 10, bool isModel = true)
         {
             Number = number;
             Seller = seller;
+            this.db = db;
             MaxQueueCount = maxQueueCount;
             IsModel = isModel;
             Carts = new Queue<Cart>();

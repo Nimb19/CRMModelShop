@@ -36,7 +36,7 @@ namespace CrmBL.Model
 
             for (int i = 0; i < CountCashDescks; i++)
             {
-                CashDesks.Add(new CashDesk(CashDesks.Count, Sellers.Dequeue()));
+                CashDesks.Add(new CashDesk(CashDesks.Count, Sellers.Dequeue(), null));
             }
         }
 
@@ -101,8 +101,7 @@ namespace CrmBL.Model
 
                 foreach (var cart in carts)
                 {
-                    //var cashDesc = CashDesks.OrderBy(x => x.Count).First();
-                    var cashDesc = CashDesks[rnd.Next(0, CashDesks.Count)];
+                    var cashDesc = CashDesks.OrderBy(x => x.Count).First();
                     cashDesc.Enqueue(cart);
                 }
 

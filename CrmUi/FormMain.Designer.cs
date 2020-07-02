@@ -39,6 +39,15 @@
             this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkAddToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.computerModetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbProducts = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbCart = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.bPay = new System.Windows.Forms.Button();
+            this.linkLabel = new System.Windows.Forms.LinkLabel();
+            this.bUpdate = new System.Windows.Forms.Button();
+            this.labelCost = new System.Windows.Forms.Label();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +58,7 @@
             this.computerModetToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(647, 24);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -134,15 +143,110 @@
             this.computerModetToolStripMenuItem.Text = "Моделирование";
             this.computerModetToolStripMenuItem.Click += new System.EventHandler(this.ComputerModetToolStripMenuItem_Click);
             // 
+            // lbProducts
+            // 
+            this.lbProducts.FormattingEnabled = true;
+            this.lbProducts.Location = new System.Drawing.Point(12, 79);
+            this.lbProducts.Name = "lbProducts";
+            this.lbProducts.Size = new System.Drawing.Size(265, 472);
+            this.lbProducts.TabIndex = 2;
+            this.lbProducts.DoubleClick += new System.EventHandler(this.lbProducts_DoubleClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 63);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Товары:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(353, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Корзина:";
+            // 
+            // lbCart
+            // 
+            this.lbCart.FormattingEnabled = true;
+            this.lbCart.Location = new System.Drawing.Point(356, 79);
+            this.lbCart.Name = "lbCart";
+            this.lbCart.Size = new System.Drawing.Size(279, 394);
+            this.lbCart.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(353, 486);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Итоговая цена: ";
+            // 
+            // bPay
+            // 
+            this.bPay.Location = new System.Drawing.Point(356, 511);
+            this.bPay.Name = "bPay";
+            this.bPay.Size = new System.Drawing.Size(279, 40);
+            this.bPay.TabIndex = 7;
+            this.bPay.Text = "Оплатить";
+            this.bPay.UseVisualStyleBackColor = true;
+            this.bPay.Click += new System.EventHandler(this.BPay_Click);
+            // 
+            // linkLabel
+            // 
+            this.linkLabel.AutoSize = true;
+            this.linkLabel.Location = new System.Drawing.Point(9, 37);
+            this.linkLabel.Name = "linkLabel";
+            this.linkLabel.Size = new System.Drawing.Size(90, 13);
+            this.linkLabel.TabIndex = 8;
+            this.linkLabel.TabStop = true;
+            this.linkLabel.Text = "Авторизоваться";
+            this.linkLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // bUpdate
+            // 
+            this.bUpdate.Location = new System.Drawing.Point(172, 50);
+            this.bUpdate.Name = "bUpdate";
+            this.bUpdate.Size = new System.Drawing.Size(105, 23);
+            this.bUpdate.TabIndex = 9;
+            this.bUpdate.Text = "Обновить";
+            this.bUpdate.UseVisualStyleBackColor = true;
+            this.bUpdate.Click += new System.EventHandler(this.bUpdate_Click);
+            // 
+            // labelCost
+            // 
+            this.labelCost.AutoSize = true;
+            this.labelCost.Location = new System.Drawing.Point(438, 486);
+            this.labelCost.Name = "labelCost";
+            this.labelCost.Size = new System.Drawing.Size(28, 13);
+            this.labelCost.TabIndex = 10;
+            this.labelCost.Text = "0,00";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(647, 563);
+            this.Controls.Add(this.labelCost);
+            this.Controls.Add(this.bUpdate);
+            this.Controls.Add(this.linkLabel);
+            this.Controls.Add(this.bPay);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lbCart);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbProducts);
             this.Controls.Add(this.menuStrip2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная форма";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -162,6 +266,15 @@
         private System.Windows.Forms.ToolStripMenuItem customerAddToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkAddToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem computerModetToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbProducts;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox lbCart;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button bPay;
+        private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.Button bUpdate;
+        private System.Windows.Forms.Label labelCost;
     }
 }
 

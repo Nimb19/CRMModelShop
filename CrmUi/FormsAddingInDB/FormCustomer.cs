@@ -34,8 +34,8 @@ namespace CrmUi.FormsAddingInDB
                 return;
             }
 
-            var customer = Customer ?? new Customer();
-            customer.Name = name.Trim();
+            Customer = Customer ?? new Customer();
+            Customer.Name = name.Trim();
 
             this.DialogResult = DialogResult.OK;
             Close();

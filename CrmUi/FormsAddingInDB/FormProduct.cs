@@ -32,10 +32,10 @@ namespace CrmUi.FormsAddingInDB
                 return;
             }
 
-            var p = Product ?? new Product();
-            p.Name = tbName.Text.Trim();
-            p.Price = nUpDownPrice.Value;
-            p.Count = Convert.ToInt32(nUpDownCount.Value);
+            Product = Product ?? new Product();
+            Product.Name = tbName.Text.Trim();
+            Product.Price = nUpDownPrice.Value;
+            Product.Count = Convert.ToInt32(nUpDownCount.Value);
 
             this.DialogResult = DialogResult.OK;
             Close();
